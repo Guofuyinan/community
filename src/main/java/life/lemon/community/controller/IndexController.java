@@ -16,8 +16,9 @@ public class IndexController {
 
     @Autowired
     private UserMapper userMapper;
+
     @GetMapping("/")
-    public String index(HttpServletRequest request){
+    public String index(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -31,10 +32,6 @@ public class IndexController {
                 }
             }
         }
-
-
-
-
 
 
         return "index";

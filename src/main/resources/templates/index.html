@@ -26,6 +26,9 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
+                <li th:if="${session.user != null}">
+                    <a href="/publish">发布</a>
+                </li>
                 <li class="dropdown" th:if="${session.user != null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -35,7 +38,8 @@
                     </ul>
                 </li>
                 <li th:unless="${session.user != null}">
-                    <a href="https://github.com/login/oauth/authorize?client_id=43ac913d03f94510bf3b&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a></li>
+                    <a href="https://github.com/login/oauth/authorize?client_id=43ac913d03f94510bf3b&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a>
+                </li>
 
             </ul>
         </div>
