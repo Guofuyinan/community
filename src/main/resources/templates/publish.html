@@ -17,7 +17,7 @@
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Lemon社区</span>
             </button>
-            <a class="navbar-brand" href="#">Lemon社区</a>
+            <a class="navbar-brand" href="/">Lemon社区</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -57,11 +57,13 @@
             <form action="/publish" method="post">
                 <div class="form-group">
                     <label for="title">问题标题 (简单扼要)</label>
-                    <input type="text" class="form-control" th:value="${title}" id="title" name="title" placeholder="标题……">
+                    <input type="text" class="form-control" th:value="${title}" id="title" name="title"
+                           placeholder="标题……">
                 </div>
                 <div class="form-group">
                     <label for="description">问题补充 (必填，请参照提示)：</label>
-                    <textarea name="description" placeholder="问题内容……" th:text="${description}"  id="description" class="form-control" cols="30" rows="10"></textarea>
+                    <textarea name="description" placeholder="问题内容……" th:text="${description}" id="description"
+                              class="form-control" cols="30" rows="10"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="tag">添加标签：</label>
@@ -70,8 +72,10 @@
 
                 <div class="container-fluid main">
                     <div class="row">
-                        <div class="alert alert-danger  col-lg-9 col-md-12 col-sm-12 col-xs-12"
-                             th:text="${error}" th:if="${error != null}"></div>
+                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <div class="alert alert-danger col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                                 th:text="${error}" th:if="${error != null}"></div>
+                        </div>
                         <div class=" col-lg-3 col-md-12 col-sm-12 col-xs-12">
                             <button type="submit" class="btn btn-success btn-publish">
                                 发布
