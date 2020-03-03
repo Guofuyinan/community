@@ -3,7 +3,7 @@ package life.lemon.community.controller;
 import life.lemon.community.dto.PaginationDTO;
 import life.lemon.community.mapper.UserMapper;
 import life.lemon.community.model.User;
-import life.lemon.community.service.QusetionService;
+import life.lemon.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ public class ProfileController {
     @Autowired
     private UserMapper userMapper;
     @Autowired
-    private QusetionService qusetionService;
+    private QuestionService questionService;
 
     @GetMapping("/profile/{action}")
     public String profile(HttpServletRequest request,
@@ -53,7 +53,7 @@ public class ProfileController {
             model.addAttribute("sectionName","最新回复");
 
         }
-        PaginationDTO paginationDTO = qusetionService.list(user.getId(), page, size);
+        PaginationDTO paginationDTO = questionService.list(user.getId(), page, size);
         model.addAttribute("pagination", paginationDTO);
 
         return "profile";

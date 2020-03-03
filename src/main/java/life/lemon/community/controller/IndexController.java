@@ -1,12 +1,9 @@
 package life.lemon.community.controller;
 
 import life.lemon.community.dto.PaginationDTO;
-import life.lemon.community.dto.QuestionDTO;
-import life.lemon.community.mapper.QuestionMapper;
 import life.lemon.community.mapper.UserMapper;
-import life.lemon.community.model.Question;
 import life.lemon.community.model.User;
-import life.lemon.community.service.QusetionService;
+import life.lemon.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 public class IndexController {
@@ -24,7 +20,7 @@ public class IndexController {
     private UserMapper userMapper;
 
     @Autowired
-    private QusetionService qusetionService;
+    private QuestionService questionService;
 
     @GetMapping("/")
     public String index(HttpServletRequest request,
@@ -46,7 +42,7 @@ public class IndexController {
             }
         }
 
-        PaginationDTO pagination = qusetionService.list(page,size);
+        PaginationDTO pagination = questionService.list(page,size);
         model.addAttribute("pagination", pagination);
         return "index";
 
