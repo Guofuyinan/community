@@ -2,6 +2,8 @@ package life.lemon.community.service;
 
 import life.lemon.community.dto.PaginationDTO;
 import life.lemon.community.dto.QuestionDTO;
+import life.lemon.community.exception.CustomizeErrorCode;
+import life.lemon.community.exception.CustomizeException;
 import life.lemon.community.mapper.QuestionMapper;
 import life.lemon.community.mapper.UserMapper;
 import life.lemon.community.model.Question;
@@ -52,7 +54,6 @@ public class QuestionService {
     public PaginationDTO list(Integer userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
 
-
         Integer totalCount = questionMapper.count();
         paginationDTO.setPagination(totalCount,page,size);
 
@@ -80,6 +81,9 @@ public class QuestionService {
 
     public QuestionDTO getById(Integer id) {
         Question question = questionMapper.getById(id);
+        if (question == null){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question, questionDTO);
         User user = userMapper.findById(question.getCreator());
@@ -96,7 +100,11 @@ public class QuestionService {
         }else {
             //更新文章
             question.setGmtModified(System.currentTimeMillis());
-            questionMapper.update(question);
+            int update = questionMapper.update(question);
+            if (update != 1){
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
+
         }
     }
 }
