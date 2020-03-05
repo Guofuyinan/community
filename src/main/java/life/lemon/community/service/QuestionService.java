@@ -107,4 +107,12 @@ public class QuestionService {
 
         }
     }
+
+    public void incView(Integer id) {
+        Question question = questionMapper.SelectViewCountById(id);
+        Question updateQuestion = new Question();
+        updateQuestion.setViewCount(question.getViewCount());
+        updateQuestion.setId(id);
+        questionMapper.updateViewCount(updateQuestion);
+    }
 }
