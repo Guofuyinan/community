@@ -12,16 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("${server.error.path:${error.path:/error}}")
-public class CustomizeErrorController implements ErrorController {
+public class CustomizeErrorController implements ErrorController {//定制一些错误
 
-    @Override
+    @Override//重写方法
     public String getErrorPath() {
         return "error";
     }
-    @RequestMapping(produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView errorHtml(HttpServletRequest request,
-                                  Model model) {
 
+    @RequestMapping(produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView errorHtml(HttpServletRequest request, Model model) {
         HttpStatus status = getStatus(request);
 
         if (status.is4xxClientError()) {
